@@ -2,7 +2,7 @@
 A c# lib to abstract and create a friendly interface for network jobs.
 
 ## Why use NETLIB?
-NETLIB encapsulates TCPClient in a friendlier layer to the developer, manages the entry of new clients, redirecting them to its management method. Manages incoming and outgoing packets, segmented them by types and redirecting exatamenta where they will be treated. It also provides an abstraction for communication protocols, facilitating the work of software using various protocols.
+NETLIB encapsulates TCPClient in a friendlier layer to the developer, manages the entry of new clients, redirecting them to its management method. Manages incoming and outgoing packets, segmented them by types and redirecting exactly where they will be treated. It also provides an abstraction for communication protocols, facilitating the work of software using various protocols.
 
 Design Goals: This library is designed to be...
 
