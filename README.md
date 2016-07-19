@@ -1,5 +1,5 @@
 # NETLIB
-A c# lib to abstract and create a friendly interface for network jobs
+A c# lib to abstract and create a friendly interface for network jobs.
 
 Design Goals: This library is designed to be...
 
@@ -15,11 +15,20 @@ the network is converted in BasePack before transmission and is subsequently rea
 It simplifies operations with the network buffer and handle reading and writing.
 
 ### Publisher
-It is the class that should get the arriving packs and put in the pack queue, that will be used by Consumer,
-and should implement a method that allows to send packs in the network.
+Describes a pack publisher, which will be responsible for managing the incoming packs, adding them in a
+queue and by setting an event signal to the Consumer that there is a pack in the queue.
 
 ### Consumer
-Class that get a pack in the pack queue and throws a event in a parallel thread, sending yourself and the pack for someone to treat the pack.
+Describes the class that will be responsible for consuming the packages, meaning it will build 
+packages with the buffers published by a publisher and will launch an event for every pack to be treated.
+
+### Protocol
+Responsible for managing a communication protocol, in other words, analyze an incoming
+packet, check for a method of treatment registered for that type of package,
+if any, the method is called to handle the package, if not a generic event
+is called to handle the incoming pack. Idealised to facilitate handling packages and management
+protocols, especially in cases where the client continuously migrates between different protocols.
 
 ### IOPackHandler
-Derived from Consumer, it uses a hash table to analyze the incoming packet ID and submit to a specific system function, pre registered by the programmer, sending the package exactly where it should go. 
+Better manage the incoming and outgoing a pack using a Protocol to redistribute the packs.
+It has an internal dictionary of Protocols that can be exchanged for the currently used.
