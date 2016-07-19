@@ -12,6 +12,28 @@ namespace NETLIB
     /// <typeparam name="TPack">Pack class derived from <see cref="BasePack"/>
     /// that the Protocol will manage.
     /// </typeparam>
+    /// <example>
+    /// The following example code shows how to instantiate a new <see cref="Protocol{TPack}"/> and how to 
+    /// configure the handler methods
+    /// <code>
+    /// public void CreateProtocolExampleMethod()
+    /// {
+    ///     var newProtocol = new Protocol&lt;BasePack&gt;("newProtocol");
+    ///     newProtocol[0] += ZeroIDHandler;
+    ///     bewProtocol.ReceivedPack += DefaultIDHundler;
+    /// }
+    /// 
+    /// private static void ZeroIDHandler(Consumer&lt;BasePack&gt; consumer, BasePack receivedPack)
+    /// {
+    ///     //Do something with the packets that have ID = 0.
+    /// }
+    /// 
+    /// private static void DefaultIDHundler(Consumer&lt;BasePack&gt; consumer, BasePack receivedPack)
+    /// {
+    ///     //Do something with the packets that do not have a handler method registered.
+    /// }
+    /// </code>
+    /// </example>
     public class Protocol<TPack> where TPack : BasePack
     {
         #region Variables

@@ -11,6 +11,54 @@ namespace NETLIB
     /// <seealso cref="Consumer{TPack}"/>
     /// <seealso cref="BasePack"/>
     /// <seealso cref="Protocol{TPack}"/>
+    /// <example>
+    /// The following example shows how to implement a chat client using <see cref="IOBasePackHandler"/> to connect
+    /// to the server and manage packages.
+    /// <code>
+    ///using NETLIB;
+    ///using NETLIB.TCP;
+    ///using System;
+    ///
+    ///namespace ChatExempleClient
+    ///{
+    ///    class Program
+    ///    {
+    ///        static IOBasePackHandler client;
+    ///        static Protocol&lt;BasePack&gt; chatProtocol;
+    ///        static string name;
+    ///
+    ///        static void Main(string[] args)
+    ///        {
+    ///            chatProtocol = new Protocol&lt;BasePack&gt;("chatProtocol");
+    ///            chatProtocol[0] += MessagePackHandle;
+    ///
+    ///            client = new IOBasePackHandler(new TCPPublisher("127.0.0.1", 1975), chatProtocol);
+    ///            client.Start();
+    ///
+    ///            Console.WriteLine("Your name please:");
+    ///            name = Console.ReadLine();
+    ///
+    ///            string aux = Console.ReadLine();
+    ///            while (aux != "exit")
+    ///            {
+    ///                var pack = new BasePack();
+    ///                pack.ID = 0;
+    ///                pack.PutString(name + ": " + aux);
+    ///                client.SendPack(pack);
+    ///                aux = Console.ReadLine();
+    ///            }
+    ///
+    ///            client.CloseConnection();          
+    ///        }
+    ///
+    ///        private static void MessagePackHandle(Consumer&lt;BasePack&gt; consumer, BasePack receivedPack)
+    ///        {
+    ///            Console.WriteLine(receivedPack.GetString());
+    ///        }
+    ///    }
+    ///}
+    /// </code>
+    /// </example>
     public class IOBasePackHandler : IOPackHandler<BasePack>
     {
         #region Variables

@@ -19,6 +19,55 @@ namespace NETLIB.TCP.Server
     /// </summary>
     /// <seealso cref="Publisher"/>
     /// <seealso cref="TCPPublisher"/>
+    /// <example>
+    /// The following example shows how to implement a chat server using <see cref="TCPListenerHandler"/> 
+    /// to manage incoming connections.
+    /// <code>
+    ///using NETLIB;
+    ///using NETLIB.TCP.Server;
+    ///using System.Collections.Generic;
+    ///
+    ///namespace ChatExempleServer
+    ///{
+    ///    class Program
+    ///    {
+    ///        static TCPListenerHandler listenerHandler;
+    ///        static List&lt;IOBasePackHandler&gt; clients;
+    ///        static Protocol&lt;BasePack&gt; chatProtocol;
+    ///
+    ///        static void Main(string[] args)
+    ///        {
+    ///            clients = new List&lt;IOBasePackHandler&gt;();
+    ///
+    ///            chatProtocol = new Protocol&lt;BasePack&gt;("chatProtocol");
+    ///            chatProtocol[0] += MessagePackHandle;
+    ///
+    ///            listenerHandler = new TCPListenerHandler();
+    ///            listenerHandler.ReceivedConnection += ListenerHandlerReceivedConnection;
+    ///            listenerHandler.BeginListen(1975);
+    ///        }
+    ///
+    ///        private static void MessagePackHandle(Consumer&lt;BasePack&gt; consumer, BasePack receivedPack)
+    ///        {
+    ///            foreach (var client in clients)
+    ///            {
+    ///                if (client != consumer)
+    ///                {
+    ///                    client.SendPack(receivedPack);
+    ///                }
+    ///            }
+    ///        }
+    ///
+    ///        private static void ListenerHandlerReceivedConnection(Publisher publisher)
+    ///        {
+    ///            var newClient = new IOBasePackHandler(publisher, chatProtocol);
+    ///            clients.Add(newClient);
+    ///            newClient.Start();
+    ///        }
+    ///    }
+    ///}
+    /// </code>
+    /// </example>
     public class TCPListenerHandler : IDisposable
     {
         #region Variables

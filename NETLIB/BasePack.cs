@@ -8,24 +8,43 @@ namespace NETLIB
     /// reassembled by the receiver. It simplifies operations with the network buffer and handle reading and writing.
     /// </summary>
     /// <example>
-    /// This example shows how to create a new pack, put and get some fields from there. 
+    /// The following code example shows how to create a new pack, put and get some fields from there. 
     /// <code>
-    /// void Example()
-    /// {
-    ///     int d1 = 5;
-    ///     int d2 = 6;
-    ///     
-    ///     int c1;
-    ///     int c2;
-    ///     
-    ///     BasePack newPack = new BasePack();
-    ///     newPack.ID = 10;
-    ///     newPack.PutInt(d1);
-    ///     newPack.PutInt(d2);
-    ///     
-    ///     c1 = newPack.GetInt();
-    ///     c2 = newPack.GetInt();
-    /// }
+    ///void BasePackUseExample()
+    ///{
+    ///    int i = 5;
+    ///    char c = 'a';
+    ///    string str = "test";
+    ///    float f = 0.5F;
+    ///    double d = 5.3F;
+    ///    bool b = false;
+    ///
+    ///    int ib;
+    ///    char cb;
+    ///    string strb;
+    ///    float fb;
+    ///    double db;
+    ///    bool bb;
+    ///
+    ///    BasePack newPack = new BasePack();
+    ///    newPack.ID = 10;
+    ///
+    ///    newPack.PutInt(i);
+    ///    newPack.PutChar(c);
+    ///    newPack.PutString(str);
+    ///    newPack.PutFloat(f);
+    ///    newPack.PutDouble(d);
+    ///    newPack.PutBool(b);
+    ///
+    ///    //Do something
+    ///
+    ///    ib = newPack.GetInt();
+    ///    cb = newPack.GetChar();
+    ///    strb = newPack.GetString();
+    ///    fb = newPack.GetFloat();
+    ///    db = newPack.GetDouble();
+    ///    bb = newPack.GetBool();
+    ///}
     /// </code>
     /// </example>
     public class BasePack

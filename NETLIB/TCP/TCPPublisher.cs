@@ -11,6 +11,21 @@ namespace NETLIB.TCP
     /// <seealso cref="Publisher"/>
     /// <seealso cref="BasePack"/>
     /// <seealso cref="Consumer{TPack}"/>
+    /// <example>
+    /// The following example code shows two ways of instantiating a new <see cref="TCPPublisher"/>
+    /// <code>
+    /// public void NewTCPPublisherExampleMethod()
+    /// {
+    ///     var publisher = new TCPPublisher("127.0.0.1", 1975);
+    /// }
+    /// 
+    /// public void NewTCPPublisherExampleMethod()
+    /// {
+    ///     TcpClient client = new TcpClient(ip, port);
+    ///     var publisher = new TCPPublisher(client.GetStream());
+    /// }
+    /// </code>
+    /// </example>
     public class TCPPublisher : Publisher
     {
         #region Variables
