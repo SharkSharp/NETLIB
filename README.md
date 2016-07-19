@@ -97,6 +97,7 @@ private static void DefaultIDHundler(Consumer<BasePack> consumer, BasePack recei
 Better manage the incoming and outgoing a pack using a Protocol to redistribute the packs.
 It has an internal dictionary of Protocols that can be exchanged for the currently used.
 
+#### IOPackHandler example
 ```cs
 public void CreateIOPackHandlerExampleMethod()
 {
