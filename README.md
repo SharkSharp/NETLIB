@@ -77,7 +77,7 @@ protocols, especially in cases where the client continuously migrates between di
 ```cs
 public void CreateProtocolExampleMethod()
 {
-   var newProtocol = new Protocol& lt; BasePack&gt;("newProtocol");
+   var newProtocol = new Protocol<BasePack>("newProtocol");
    newProtocol[0] += ZeroIDHandler;
    bewProtocol.ReceivedPack += DefaultIDHundler;
 }
@@ -98,7 +98,25 @@ Better manage the incoming and outgoing a pack using a Protocol to redistribute 
 It has an internal dictionary of Protocols that can be exchanged for the currently used.
 
 ```cs
+public void CreateIOPackHandlerExampleMethod()
+{
+   var newProtocol = new Protocol<BasePack>("newProtocol");
+   newProtocol[0] += ZeroIDHandler;
+   bewProtocol.ReceivedPack += DefaultIDHundler;
 
+   client = new IOBasePackHandler(new TCPPublisher("127.0.0.1", 1975), newProtocol);
+   client.Start();
+}
+
+private static void ZeroIDHandler(Consumer<BasePack> consumer, BasePack receivedPack)
+{
+   //Do something with the packets that have ID = 0.
+}
+
+private static void DefaultIDHundler(Consumer<BasePack> consumer, BasePack receivedPack)
+{
+   //Do something with the packets that do not have a handler method registered.
+}
 ```
 
 ### Chat server example
