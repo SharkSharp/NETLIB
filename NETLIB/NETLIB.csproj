@@ -48,11 +48,12 @@
     <Compile Include="IPackable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Publisher.cs" />
+    <Compile Include="Security\CryptIOPackHandler.cs" />
+    <Compile Include="Security\CryptPack.cs" />
     <Compile Include="TCP\Server\TCPListenerHandler.cs" />
     <Compile Include="TCP\TCPPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Security\" />
     <Folder Include="UDP\Server\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
