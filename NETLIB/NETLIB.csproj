@@ -52,6 +52,9 @@
     <Compile Include="Security\CryptPack.cs" />
     <Compile Include="TCP\Server\TCPListenerHandler.cs" />
     <Compile Include="TCP\TCPPublisher.cs" />
+    <Compile Include="UDP\IOUDPPackHandler.cs" />
+    <Compile Include="UDP\UDPPack.cs" />
+    <Compile Include="UDP\UDPPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UDP\Server\" />

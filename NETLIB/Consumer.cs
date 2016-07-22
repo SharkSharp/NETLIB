@@ -56,7 +56,7 @@ namespace NETLIB
         /// <seealso cref="NETLIB.Publisher"/>
         /// <seealso cref="NETLIB.Publisher.Publish"/>
         /// <seealso cref="Consume"/>
-        Publisher publisher;
+        protected Publisher publisher;
 
         /// <summary>
         /// Queue that stores incoming packets. Reference the queue created by <see cref="publisher"/>.
@@ -64,14 +64,14 @@ namespace NETLIB
         /// <seealso cref="NETLIB.Publisher.PackQueue"/>
         /// <seealso cref="NETLIB.Publisher.Publish"/>
         /// <seealso cref="Consume"/>
-        Queue<byte[]> packQueue;
+        protected Queue<byte[]> packQueue;
 
         /// <summary>
         /// Event signaling that a packet arrived. Reference the event created by <see cref="publisher"/>.
         /// </summary>
         /// <seealso cref="NETLIB.Publisher"/>
         /// <seealso cref="NETLIB.Publisher.IncomingPackEvent"/>
-        AutoResetEvent incomingPackEvent;
+        protected AutoResetEvent incomingPackEvent;
 
         /// <summary>
         /// Thread used to walk through the <see cref="packQueue"/> to the end, consuming up to
@@ -80,13 +80,13 @@ namespace NETLIB
         /// <seealso cref="Consume"/>
         /// <seealso cref="Start"/>
         /// <seealso cref="StartConsume"/>
-        Thread consumerThread;
+        protected Thread consumerThread;
 
         /// <summary>
         /// Boolean indicating when the consumption of packages is active.
         /// </summary>
         /// <seealso cref="Consume"/>
-        bool isEnabled;
+        protected bool isEnabled;
 
         #endregion
 
@@ -300,7 +300,7 @@ namespace NETLIB
         /// <seealso cref="ReceivedPack"/>
         /// <seealso cref="BasePack"/>
         /// <seealso cref="NETLIB.Publisher.Publish"/>
-        private void Consume()
+        protected virtual void Consume()
         {
             while (publisher.IsEnabled && isEnabled)
             {
