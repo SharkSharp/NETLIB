@@ -6,11 +6,11 @@ namespace NETLIB.Security
     /// <summary>
     /// 
     /// </summary>
-    public class CryptIOPackHandler : IOPackHandler<CryptPack>
+    public abstract class CryptIOPackHandler : IOPackHandler<CryptPack>
     {
         #region Variables
 
-        AesCryptoServiceProvider serviceProvider;
+
 
         #endregion
 
@@ -24,11 +24,7 @@ namespace NETLIB.Security
         /// <param name="initialProtocol">Initial <see cref="Protocol{TPack}"/> to be used by this connection.</param>
         /// <see cref="IOPackHandler{TPack}"/>
         /// <see cref="IOPackHandler{TPack}(Publisher, Protocol{TPack})"/>
-        public CryptIOPackHandler(Publisher publisher, Protocol<CryptPack> initialProtocol) 
-            : base(publisher, initialProtocol)
-        {
-            serviceProvider = new AesCryptoServiceProvider();
-        }
+        public CryptIOPackHandler(Publisher publisher, Protocol<CryptPack> initialProtocol) : base(publisher, initialProtocol) { }
 
         #endregion
 
@@ -44,10 +40,23 @@ namespace NETLIB.Security
         /// 
         /// </summary>
         /// <param name="pack"></param>
+        /// <returns></returns>
+        protected abstract byte[] Encrypt(byte[] pack);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pack"></param>
+        protected abstract void Decrypt(byte[] pack);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pack"></param>
         /// <param name="ip"></param>
         public override void SendPack(byte[] pack, IPEndPoint ip = null)
         {
-            base.SendPack(pack, ip);
+            base.SendPack(Encrypt(pack), ip);
         }
 
         /// <summary>
@@ -57,7 +66,7 @@ namespace NETLIB.Security
         /// <param name="ip"></param>
         public override void SendPack(CryptPack pack, IPEndPoint ip = null)
         {
-            base.SendPack(pack, ip);
+            base.SendPack(Encrypt(pack.Buffer), ip);
         }
 
         /// <summary>
@@ -66,8 +75,11 @@ namespace NETLIB.Security
         /// <param name="pack"></param>
         protected override void OnReceivedPackCall(CryptPack pack)
         {
+            Decrypt(pack.Buffer);
             base.OnReceivedPackCall(pack);
         }
+
+
 
         /// <summary>
         /// Create a new instance of CryptPack that initializes the inner buffer with
