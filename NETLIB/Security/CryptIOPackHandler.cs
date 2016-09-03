@@ -85,7 +85,7 @@ namespace NETLIB.Security
         /// <paramref name="buffer"/> as your own inner buffer.
         /// </summary>
         /// <param name="buffer">Source buffer.</param>
-        /// <seealso cref="BasePack(byte[])"/>
+        /// <seealso cref="BasePack(byte[], bool)"/>
         public override CryptPack PackFactory(byte[] buffer)
         {
             return new CryptPack(buffer);
@@ -98,7 +98,7 @@ namespace NETLIB.Security
         /// are not copied.
         /// </summary>
         /// <param name="basePack">BasePack that will be copied.</param>
-        /// <seealso cref="BasePack(BasePack)"/>
+        /// <seealso cref="BasePack(BasePack, bool)"/>
         public override CryptPack PackFactory(BasePack basePack)
         {
             return new CryptPack(basePack);

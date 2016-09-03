@@ -39,7 +39,7 @@
         /// <summary>
         /// Initialize the inner buffer with <see cref="BasePack.packSize"/>.
         /// </summary>
-        /// <seealso cref="BasePack()"/>
+        /// <seealso cref="BasePack(bool)"/>
         /// <seealso cref="BasePack.packSize"/>
         public CryptPack()
             : base()
@@ -53,7 +53,7 @@
         /// Initialize the inner buffer with <see cref="BasePack.packSize"/> and set if the pack will be encrypted.
         /// </summary>
         /// <param name="isEncrypted">Indicates whether the pack is encrypted.</param>
-        /// <seealso cref="BasePack()"/>
+        /// <seealso cref="BasePack(bool)"/>
         /// <seealso cref="BasePack.packSize"/>
         public CryptPack(bool isEncrypted)
             : base()
@@ -69,7 +69,7 @@
         /// The <see cref="BasePack.readPosition"/> and the <see cref="BasePack.writePosition"/> are not copied
         /// </summary>
         /// <param name="basePack">BasePack that will be copied.</param>
-        /// <seealso cref="BasePack(BasePack)"/>
+        /// <seealso cref="BasePack(BasePack, bool)"/>
         public CryptPack(BasePack basePack)
             : base(basePack)
         {
@@ -82,7 +82,7 @@
         /// Initialize the BasePack taking <paramref name="buffer"/> as your own inner buffer
         /// </summary>
         /// <param name="buffer">Source buffer.</param>
-        /// <seealso cref="BasePack(byte[])"/>
+        /// <seealso cref="BasePack(byte[], bool)"/>
         public CryptPack(byte[] buffer)
             : base(buffer)
         {
