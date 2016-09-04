@@ -50,6 +50,7 @@
     <Compile Include="Publisher.cs" />
     <Compile Include="Security\CryptIOPackHandler.cs" />
     <Compile Include="Security\CryptPack.cs" />
+    <Compile Include="Security\AESCryptIOPackHandler.cs" />
     <Compile Include="TCP\Server\TCPListenerHandler.cs" />
     <Compile Include="TCP\TCPPublisher.cs" />
   </ItemGroup>

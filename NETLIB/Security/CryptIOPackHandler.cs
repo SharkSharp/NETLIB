@@ -40,24 +40,18 @@ namespace NETLIB.Security
         /// 
         /// </summary>
         /// <param name="pack"></param>
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
         /// <returns></returns>
-        protected abstract byte[] Encrypt(byte[] pack);
+        protected abstract byte[] Encrypt(byte[] pack, int offset, int count);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pack"></param>
-        protected abstract void Decrypt(byte[] pack);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pack"></param>
-        /// <param name="ip"></param>
-        public override void SendPack(byte[] pack, IPEndPoint ip = null)
-        {
-            base.SendPack(Encrypt(pack), ip);
-        }
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
+        protected abstract void Decrypt(byte[] pack, int offset, int count);
 
         /// <summary>
         /// 
@@ -66,7 +60,7 @@ namespace NETLIB.Security
         /// <param name="ip"></param>
         public override void SendPack(CryptPack pack, IPEndPoint ip = null)
         {
-            base.SendPack(Encrypt(pack.Buffer), ip);
+            base.SendPack(Encrypt(pack.Buffer, CryptPack.BEGIN_ENCRYPTED_DATA_INDEX, pack.Length - CryptPack.BEGIN_ENCRYPTED_DATA_INDEX), ip);
         }
 
         /// <summary>
@@ -75,10 +69,9 @@ namespace NETLIB.Security
         /// <param name="pack"></param>
         protected override void OnReceivedPackCall(CryptPack pack)
         {
-            Decrypt(pack.Buffer);
+            Decrypt(pack.Buffer, CryptPack.BEGIN_ENCRYPTED_DATA_INDEX, pack.Length - CryptPack.BEGIN_ENCRYPTED_DATA_INDEX);
             base.OnReceivedPackCall(pack);
         }
-
 
 
         /// <summary>

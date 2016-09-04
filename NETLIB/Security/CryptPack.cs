@@ -28,6 +28,11 @@
         protected const int ENCRYPTED_ID_SIZE = sizeof(int);
 
         /// <summary>
+        /// 
+        /// </summary>
+        public const int BEGIN_ENCRYPTED_DATA_INDEX = ENCRYPTED_ID_INDEX + ENCRYPTED_ID_SIZE;
+
+        /// <summary>
         /// Indicates whether the pack is encrypted.
         /// </summary>
         bool isEncrypted = true;
@@ -45,8 +50,8 @@
             : base()
         {
             this.PutBool(this.isEncrypted, IS_ENCRYPTED_INDEX);
-            this.readPosition = ENCRYPTED_ID_INDEX + ENCRYPTED_ID_SIZE;
-            this.writePosition = ENCRYPTED_ID_INDEX + ENCRYPTED_ID_SIZE;
+            this.readPosition = BEGIN_ENCRYPTED_DATA_INDEX;
+            this.writePosition = BEGIN_ENCRYPTED_DATA_INDEX;
         }
 
         /// <summary>
@@ -60,8 +65,8 @@
         {
             this.isEncrypted = isEncrypted;
             this.PutBool(isEncrypted, IS_ENCRYPTED_INDEX);
-            this.readPosition = ENCRYPTED_ID_INDEX + ENCRYPTED_ID_SIZE;
-            this.writePosition = ENCRYPTED_ID_INDEX + ENCRYPTED_ID_SIZE;
+            this.readPosition = BEGIN_ENCRYPTED_DATA_INDEX;
+            this.writePosition = BEGIN_ENCRYPTED_DATA_INDEX;
         }
 
         /// <summary>
@@ -74,8 +79,8 @@
             : base(basePack)
         {
             this.isEncrypted = GetBool(IS_ENCRYPTED_INDEX);
-            this.readPosition = ENCRYPTED_ID_INDEX + ENCRYPTED_ID_SIZE;
-            this.writePosition = ENCRYPTED_ID_INDEX + ENCRYPTED_ID_SIZE;
+            this.readPosition = BEGIN_ENCRYPTED_DATA_INDEX;
+            this.writePosition = BEGIN_ENCRYPTED_DATA_INDEX;
         }
 
         /// <summary>
@@ -87,8 +92,8 @@
             : base(buffer)
         {
             this.isEncrypted = GetBool(IS_ENCRYPTED_INDEX);
-            this.readPosition = ENCRYPTED_ID_INDEX + ENCRYPTED_ID_SIZE;
-            this.writePosition = ENCRYPTED_ID_INDEX + ENCRYPTED_ID_SIZE;
+            this.readPosition = BEGIN_ENCRYPTED_DATA_INDEX;
+            this.writePosition = BEGIN_ENCRYPTED_DATA_INDEX;
         }
 
         #endregion
