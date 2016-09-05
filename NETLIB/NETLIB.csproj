@@ -55,6 +55,8 @@
     <Compile Include="TCP\TCPPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Security\Certification\" />
+    <Folder Include="Security\Cryptography\" />
     <Folder Include="UDP\Server\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
