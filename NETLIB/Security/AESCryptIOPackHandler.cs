@@ -74,21 +74,16 @@ namespace NETLIB.Security
         {
             var encryptor = aesProvider.CreateEncryptor();
 
-            byte[] buffer = new byte[pack.Length];
-
-            using (MemoryStream ms = new MemoryStream(pack, offset, count))
+            byte[] buffer;
+            using (MemoryStream ms = new MemoryStream(pack.Length))
             {
-                using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Read))
+                ms.Write(pack, 0, offset);
+                using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
                 {
-                    cs.Read(buffer, offset, count);
+                    cs.Write(pack, offset, count);
                 }
-
-                for (int i = 0; i < offset; i++)
-                {
-                    buffer[i] = pack[i];
-                }
+                buffer = ms.ToArray();
             }
-
             return buffer;
         }
 
