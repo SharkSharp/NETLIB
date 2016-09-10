@@ -30,6 +30,16 @@ namespace NETLIB
         #region Constructor
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="publisher"></param>
+        public IOPackHandler(Publisher publisher) 
+            : base(publisher)
+        {
+            this.protocols = new Dictionary<string, Protocol<TPack>>();
+        }
+
+        /// <summary>
         /// Initializes the handler with a publisher who will publish the
         /// packages and a protocol that will be used initially by this connection.
         /// </summary>
@@ -63,10 +73,13 @@ namespace NETLIB
         /// Add a new protocol in the protocols dictionary.
         /// </summary>
         /// <param name="newProtocol">Protocol to be added to the dictionary.</param>
+        /// <param name="exchage">Exchange current protocol.</param>
         /// <seealso cref="protocols"/>
-        public void AddProtocol(Protocol<TPack> newProtocol)
+        public void AddProtocol(Protocol<TPack> newProtocol, bool exchage = false)
         {
             protocols.Add(newProtocol.Name, newProtocol);
+            if (exchage)
+                currentProtocol = newProtocol;
         }
 
         /// <summary>
@@ -87,7 +100,7 @@ namespace NETLIB
         /// <param name="pack"></param>
         protected override void OnReceivedPackCall(TPack pack)
         {
-            currentProtocol.OnReceivedPackCall(this, pack);
+            currentProtocol?.OnReceivedPackCall(this, pack);
             base.OnReceivedPackCall(pack);
         }
 
