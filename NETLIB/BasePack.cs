@@ -56,7 +56,7 @@ namespace NETLIB
         /// <para>Used by <see cref="Publisher"/> to receive the network buffer</para>
         /// </summary>
         /// <seealso cref="Publisher"/>
-        public static int packSize = 1500;
+        public static int packSize = 1414;
 
         /// <summary>
         /// Hold the pack information.
@@ -88,9 +88,16 @@ namespace NETLIB
         /// <summary>
         /// Initialize the inner buffer with packSize
         /// </summary>
+        /// <param name="ignoreID">Using the ID byte usually as byte packet.</param>
         /// <seealso cref="packSize"/>
-        public BasePack()
+        public BasePack(bool ignoreID = false)
         {
+            if (ignoreID)
+            {
+                readPosition = 0;
+                writePosition = 0;
+            }
+
             this.buffer = new byte[packSize];
         }
 
@@ -98,18 +105,32 @@ namespace NETLIB
         /// Takes the <paramref name="basePack"/> inner buffer as its own inner beffer.
         /// The <see cref="readPosition"/> and the <see cref="writePosition"/> are not copied
         /// </summary>
+        /// <param name="ignoreID">Using the ID byte usually as byte packet.</param>
         /// <param name="basePack">BasePack that will be copied</param>
-        protected BasePack(BasePack basePack)
+        protected BasePack(BasePack basePack, bool ignoreID = false)
         {
+            if (ignoreID)
+            {
+                readPosition = 0;
+                writePosition = 0;
+            }
+
             this.buffer = basePack.buffer;
         }
 
         /// <summary>
         /// Initialize the BasePack taking <paramref name="buffer"/> as your own inner buffer
         /// </summary>
+        /// <param name="ignoreID">Using the ID byte usually as byte packet.</param>
         /// <param name="buffer">Source buffer</param>
-        protected BasePack(byte[] buffer)
+        protected BasePack(byte[] buffer, bool ignoreID = false)
         {
+            if (ignoreID)
+            {
+                readPosition = 0;
+                writePosition = 0;
+            }
+
             if (buffer.Length <= packSize)
             {
                 this.buffer = buffer;

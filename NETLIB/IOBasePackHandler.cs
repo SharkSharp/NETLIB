@@ -94,7 +94,7 @@ namespace NETLIB
 
         /// <summary>
         /// Used by the <see cref="Consumer{TPack}.Consume"/> to obtain an instance of the <see cref="BasePack"/>
-        /// through <see cref="BasePack(BasePack)"/>  constructor.
+        /// through <see cref="BasePack(BasePack, bool)"/>  constructor.
         /// </summary>
         /// <param name="pack"><see cref="BasePack"/> to be based on.</param>
         /// <returns>New <see cref="BasePack"/> based on <paramref name="pack"/></returns>
@@ -105,7 +105,7 @@ namespace NETLIB
 
         /// <summary>
         /// Used by the <see cref="Consumer{TPack}.Consume"/> to obtain an instance of the <see cref="BasePack"/>
-        /// through <see cref="BasePack(byte[])"/>  constructor.
+        /// through <see cref="BasePack(byte[], bool)"/>  constructor.
         /// </summary>
         /// <param name="pack"><see cref="BasePack"/> to be based on.</param>
         /// <returns>New <see cref="BasePack"/> based on <paramref name="pack"/></returns>
@@ -116,7 +116,7 @@ namespace NETLIB
 
         /// <summary>
         /// Used by the <see cref="Consumer{TPack}.Consume"/> to obtain an instance of the <see cref="BasePack"/>
-        /// through <see cref="BasePack()"/>  constructor.
+        /// through <see cref="BasePack(bool)"/>  constructor.
         /// </summary>
         /// <returns>New <see cref="BasePack"/>.</returns>
         public override BasePack PackFactory()
