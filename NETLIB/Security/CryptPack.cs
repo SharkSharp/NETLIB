@@ -19,7 +19,7 @@
         /// Index of <see cref="BasePack.buffer"/> which locates the ID copy used to determine if there was
         /// any error at the time of decryption, that is, if the package is corrupted.
         /// </summary>
-        protected const int ENCRYPTED_ID_INDEX = 2;
+        public const int ENCRYPTED_ID_INDEX = 2;
 
         /// <summary>
         /// Number of bytes that will be used in the pack integrity checking ID. The larger number of bytes,

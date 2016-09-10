@@ -56,7 +56,7 @@ namespace NETLIB
         /// <para>Used by <see cref="Publisher"/> to receive the network buffer</para>
         /// </summary>
         /// <seealso cref="Publisher"/>
-        public static int packSize = 1414;
+        public static int packSize = 1410;
 
         /// <summary>
         /// Hold the pack information.

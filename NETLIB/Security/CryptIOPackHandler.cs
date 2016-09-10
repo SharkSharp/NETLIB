@@ -68,7 +68,7 @@ namespace NETLIB.Security
         {
             if (pack.IsEncrypted)
             {
-                base.SendPack(Encrypt(pack.Buffer, CryptPack.BEGIN_ENCRYPTED_DATA_INDEX, pack.Length - CryptPack.BEGIN_ENCRYPTED_DATA_INDEX), ip);
+                base.SendPack(Encrypt(pack.Buffer, CryptPack.ENCRYPTED_ID_INDEX, pack.Length - CryptPack.ENCRYPTED_ID_INDEX), ip);
             }
             else
             {
@@ -84,7 +84,7 @@ namespace NETLIB.Security
         {
             if (pack.IsEncrypted)
             {
-                Decrypt(pack.Buffer, CryptPack.BEGIN_ENCRYPTED_DATA_INDEX, pack.Length - CryptPack.BEGIN_ENCRYPTED_DATA_INDEX);
+                Decrypt(pack.Buffer, CryptPack.ENCRYPTED_ID_INDEX, pack.Length - CryptPack.ENCRYPTED_ID_INDEX);
             }
             base.OnReceivedPackCall(pack);
         }
