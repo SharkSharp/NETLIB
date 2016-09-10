@@ -17,6 +17,12 @@ namespace NETLIB.Security
         #region Constructor
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="publisher"></param>
+        public CryptIOPackHandler(Publisher publisher) : base(publisher) { }
+
+        /// <summary>
         /// Initializes the handler with a publisher who will publish the
         /// packages and a protocol that will be used initially by this connection.
         /// </summary>
@@ -60,7 +66,14 @@ namespace NETLIB.Security
         /// <param name="ip"></param>
         public override void SendPack(CryptPack pack, IPEndPoint ip = null)
         {
-            base.SendPack(Encrypt(pack.Buffer, CryptPack.BEGIN_ENCRYPTED_DATA_INDEX, pack.Length - CryptPack.BEGIN_ENCRYPTED_DATA_INDEX), ip);
+            if (pack.IsEncrypted)
+            {
+                base.SendPack(Encrypt(pack.Buffer, CryptPack.BEGIN_ENCRYPTED_DATA_INDEX, pack.Length - CryptPack.BEGIN_ENCRYPTED_DATA_INDEX), ip);
+            }
+            else
+            {
+                base.SendPack(pack, ip);
+            }
         }
 
         /// <summary>
@@ -69,7 +82,10 @@ namespace NETLIB.Security
         /// <param name="pack"></param>
         protected override void OnReceivedPackCall(CryptPack pack)
         {
-            Decrypt(pack.Buffer, CryptPack.BEGIN_ENCRYPTED_DATA_INDEX, pack.Length - CryptPack.BEGIN_ENCRYPTED_DATA_INDEX);
+            if (pack.IsEncrypted)
+            {
+                Decrypt(pack.Buffer, CryptPack.BEGIN_ENCRYPTED_DATA_INDEX, pack.Length - CryptPack.BEGIN_ENCRYPTED_DATA_INDEX);
+            }
             base.OnReceivedPackCall(pack);
         }
 

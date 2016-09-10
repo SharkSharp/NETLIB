@@ -20,6 +20,19 @@ namespace NETLIB.Security
         /// 
         /// </summary>
         /// <param name="publisher"></param>
+        public AESCryptIOPackHandler(Publisher publisher) : base(publisher) { }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="publisher"></param>
+        /// <param name="initialProtocol"></param>
+        public AESCryptIOPackHandler(Publisher publisher, Protocol<CryptPack> initialProtocol) : base(publisher, initialProtocol) { }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="publisher"></param>
         /// <param name="initialProtocol"></param>
         /// <param name="iv"></param>
         /// <param name="key"></param>
@@ -41,6 +54,19 @@ namespace NETLIB.Security
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="iv"></param>
+        /// <param name="key"></param>
+        public void InitializeAES(byte[] iv, byte[] key)
+        {
+            aesProvider = new AesCryptoServiceProvider();
+            aesProvider.IV = iv;
+            aesProvider.Key = key;
+            aesProvider.Padding = PaddingMode.None;
+        }
 
         /// <summary>
         /// 
