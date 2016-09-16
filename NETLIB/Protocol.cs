@@ -135,6 +135,19 @@ namespace NETLIB
             set { triggers[index] = value; }
         }
 
+        /// <summary>
+        /// Gets the method reletad to a specific ID.
+        /// </summary>
+        /// <param name="index">ID of the pack.</param>
+        /// <returns>Method reletad to <paramref name="index"/></returns>
+        /// <exception cref="IndexOutOfRangeException">When the imput index do not exists.</exception>
+        public ThrowPackEventHandler<TPack> this[Enum index]
+        {
+            get { return triggers[Convert.ToByte(index)]; }
+
+            set { triggers[Convert.ToByte(index)] = value; }
+        }
+
         #endregion
 
         #region Methods

@@ -6,15 +6,21 @@ namespace NETLIB.Security
     /// <summary>
     /// 
     /// </summary>
-    public class CryptIOPackHandler : IOPackHandler<CryptPack>
+    public abstract class CryptIOPackHandler : IOPackHandler<CryptPack>
     {
         #region Variables
 
-        AesCryptoServiceProvider serviceProvider;
+
 
         #endregion
 
         #region Constructor
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="publisher"></param>
+        public CryptIOPackHandler(Publisher publisher) : base(publisher) { }
 
         /// <summary>
         /// Initializes the handler with a publisher who will publish the
@@ -24,11 +30,7 @@ namespace NETLIB.Security
         /// <param name="initialProtocol">Initial <see cref="Protocol{TPack}"/> to be used by this connection.</param>
         /// <see cref="IOPackHandler{TPack}"/>
         /// <see cref="IOPackHandler{TPack}(Publisher, Protocol{TPack})"/>
-        public CryptIOPackHandler(Publisher publisher, Protocol<CryptPack> initialProtocol) 
-            : base(publisher, initialProtocol)
-        {
-            serviceProvider = new AesCryptoServiceProvider();
-        }
+        public CryptIOPackHandler(Publisher publisher, Protocol<CryptPack> initialProtocol) : base(publisher, initialProtocol) { }
 
         #endregion
 
@@ -44,11 +46,18 @@ namespace NETLIB.Security
         /// 
         /// </summary>
         /// <param name="pack"></param>
-        /// <param name="ip"></param>
-        public override void SendPack(byte[] pack, IPEndPoint ip = null)
-        {
-            base.SendPack(pack, ip);
-        }
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        protected abstract byte[] Encrypt(byte[] pack, int offset, int count);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pack"></param>
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
+        protected abstract void Decrypt(byte[] pack, int offset, int count);
 
         /// <summary>
         /// 
@@ -57,7 +66,14 @@ namespace NETLIB.Security
         /// <param name="ip"></param>
         public override void SendPack(CryptPack pack, IPEndPoint ip = null)
         {
-            base.SendPack(pack, ip);
+            if (pack.IsEncrypted)
+            {
+                base.SendPack(Encrypt(pack.Buffer, CryptPack.ENCRYPTED_ID_INDEX, pack.Length - CryptPack.ENCRYPTED_ID_INDEX), ip);
+            }
+            else
+            {
+                base.SendPack(pack, ip);
+            }
         }
 
         /// <summary>
@@ -66,8 +82,13 @@ namespace NETLIB.Security
         /// <param name="pack"></param>
         protected override void OnReceivedPackCall(CryptPack pack)
         {
+            if (pack.IsEncrypted)
+            {
+                Decrypt(pack.Buffer, CryptPack.ENCRYPTED_ID_INDEX, pack.Length - CryptPack.ENCRYPTED_ID_INDEX);
+            }
             base.OnReceivedPackCall(pack);
         }
+
 
         /// <summary>
         /// Create a new instance of CryptPack that initializes the inner buffer with
@@ -85,7 +106,7 @@ namespace NETLIB.Security
         /// <paramref name="buffer"/> as your own inner buffer.
         /// </summary>
         /// <param name="buffer">Source buffer.</param>
-        /// <seealso cref="BasePack(byte[])"/>
+        /// <seealso cref="BasePack(byte[], bool)"/>
         public override CryptPack PackFactory(byte[] buffer)
         {
             return new CryptPack(buffer);
@@ -98,7 +119,7 @@ namespace NETLIB.Security
         /// are not copied.
         /// </summary>
         /// <param name="basePack">BasePack that will be copied.</param>
-        /// <seealso cref="BasePack(BasePack)"/>
+        /// <seealso cref="BasePack(BasePack, bool)"/>
         public override CryptPack PackFactory(BasePack basePack)
         {
             return new CryptPack(basePack);

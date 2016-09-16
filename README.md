@@ -120,6 +120,8 @@ private static void DefaultIDHundler(Consumer<BasePack> consumer, BasePack recei
 }
 ```
 
+# Chat code example using NETLIB
+
 ### Chat server example
 
 ```cs

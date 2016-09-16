@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -150,7 +151,7 @@ namespace NETLIB.TCP.Server
         {
             if (!isEnabled)
             {
-                listener = new TcpListener(port);
+                listener = new TcpListener(IPAddress.Any, port);
 
                 listenThread.Start();
                 isEnabled = true;

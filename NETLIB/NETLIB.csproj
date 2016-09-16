@@ -50,6 +50,7 @@
     <Compile Include="Publisher.cs" />
     <Compile Include="Security\CryptIOPackHandler.cs" />
     <Compile Include="Security\CryptPack.cs" />
+    <Compile Include="Security\AESCryptIOPackHandler.cs" />
     <Compile Include="TCP\Server\TCPListenerHandler.cs" />
     <Compile Include="TCP\TCPPublisher.cs" />
     <Compile Include="UDP\IOUDPPackHandler.cs" />
@@ -57,6 +58,8 @@
     <Compile Include="UDP\UDPPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Security\Certification\" />
+    <Folder Include="Security\Cryptography\" />
     <Folder Include="UDP\Server\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

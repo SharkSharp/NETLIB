@@ -320,7 +320,7 @@ namespace NETLIB
 
         /// <summary>
         /// Used by the <see cref="Consume"/> to obtain an instance of the <typeparamref name="TPack"/>
-        /// through <see cref="BasePack(BasePack)"/>  constructor.
+        /// through <see cref="BasePack(BasePack, bool)"/>  constructor.
         /// </summary>
         /// <param name="pack">BasePack to be based on.</param>
         /// <returns>New <typeparamref name="TPack"/> based on <paramref name="pack"/></returns>
@@ -328,7 +328,7 @@ namespace NETLIB
 
         /// <summary>
         /// Used by the <see cref="Consume"/> to obtain an instance of the <typeparamref name="TPack"/>
-        /// through <see cref="BasePack(byte[])"/> constructor.
+        /// through <see cref="BasePack(byte[], bool)"/> constructor.
         /// </summary>
         /// <param name="pack">Buffer to be based on.</param>
         /// <returns>New <typeparamref name="TPack"/> based on <paramref name="pack"/></returns>
@@ -336,7 +336,7 @@ namespace NETLIB
 
         /// <summary>
         /// Used by the <see cref="Consume"/> to obtain an instance of the <typeparamref name="TPack"/>
-        /// through <see cref="BasePack()"/> constructor.
+        /// through <see cref="BasePack(bool)"/> constructor.
         /// </summary>
         /// <returns>New <typeparamref name="TPack"/>.</returns>
         public abstract TPack PackFactory();
