@@ -79,7 +79,7 @@ public void CreateProtocolExampleMethod()
 {
    var newProtocol = new Protocol<BasePack>("newProtocol");
    newProtocol[0] += ZeroIDHandler;
-   bewProtocol.ReceivedPack += DefaultIDHundler;
+   newProtocol.ReceivedPack += DefaultIDHundler;
 }
 
 private static void ZeroIDHandler(Consumer<BasePack> consumer, BasePack receivedPack)
@@ -103,7 +103,7 @@ public void CreateIOPackHandlerExampleMethod()
 {
    var newProtocol = new Protocol<BasePack>("newProtocol");
    newProtocol[0] += ZeroIDHandler;
-   bewProtocol.ReceivedPack += DefaultIDHundler;
+   newProtocol.ReceivedPack += DefaultIDHundler;
 
    client = new IOBasePackHandler(new TCPPublisher("127.0.0.1", 1975), newProtocol);
    client.Start();
