@@ -2,7 +2,7 @@
 A c# lib to abstract and create a friendly interface for network jobs.
 
 ## Why use NETLIB?
-NETLIB encapsulates TCPClient in a friendlier layer to the developer, manages the entry of new clients, redirecting them to its management method. Manages incoming and outgoing packets, segmented them by types and redirecting exactly where they will be treated. It also provides an abstraction for communication protocols, facilitating the work of software using various protocols.
+NETLIB encapsulates TCPClient in a friendlier layer to the developer, manages the entry of new clients, redirecting them to its management method. Manages incoming and outgoing packs, segmented them by types and redirecting exactly where they will be treated. It also provides an abstraction for communication protocols, facilitating the work of software using various protocols.
 
 Design Goals: This library is designed to be...
 
@@ -62,14 +62,14 @@ Describes a pack publisher, which will be responsible for managing the incoming 
 queue and by setting an event signal to the Consumer that there is a pack in the queue.
 
 ### Consumer
-Describes the class that will be responsible for consuming the packages, meaning it will build 
-packages with the buffers published by a publisher and will launch an event for every pack to be treated.
+Describes the class that will be responsible for consuming the packs, meaning it will build 
+packs with the buffers published by a publisher and will launch an event for every pack to be treated.
 
 ### Protocol
 Responsible for managing a communication protocol, in other words, analyze an incoming
-packet, check for a method of treatment registered for that type of package,
-if any, the method is called to handle the package, if not a generic event
-is called to handle the incoming pack. Idealised to facilitate handling packages and management
+pack, check for a method of treatment registered for that type of pack,
+if any, the method is called to handle the pack, if not a generic event
+is called to handle the incoming pack. Idealised to facilitate handling packs and management
 protocols, especially in cases where the client continuously migrates between different protocols.
 
 #### Protocol Example
@@ -84,12 +84,12 @@ public void CreateProtocolExampleMethod()
 
 private static void ZeroIDHandler(Consumer<BasePack> consumer, BasePack receivedPack)
 {
-   //Do something with the packets that have ID = 0.
+   //Do something with the packs that have ID = 0.
 }
 
 private static void DefaultIDHundler(Consumer<BasePack> consumer, BasePack receivedPack)
 {
-   //Do something with the packets that do not have a handler method registered.
+   //Do something with the packs that do not have a handler method registered.
 }
 ```
 
@@ -111,12 +111,12 @@ public void CreateIOPackHandlerExampleMethod()
 
 private static void ZeroIDHandler(Consumer<BasePack> consumer, BasePack receivedPack)
 {
-   //Do something with the packets that have ID = 0.
+   //Do something with the packs that have ID = 0.
 }
 
 private static void DefaultIDHundler(Consumer<BasePack> consumer, BasePack receivedPack)
 {
-   //Do something with the packets that do not have a handler method registered.
+   //Do something with the packs that do not have a handler method registered.
 }
 ```
 
