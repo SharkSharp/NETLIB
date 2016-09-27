@@ -208,10 +208,7 @@ namespace NETLIB
         /// <seealso cref="NETLIB.Publisher.Publish"/>
         protected virtual void OnReceivedPackCall(TPack pack)
         {
-            if (ReceivedPack != null)
-            {
-                ReceivedPack(this, pack);
-            }
+            ReceivedPack?.Invoke(this, pack);
         }
 
         /// <summary>

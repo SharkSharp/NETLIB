@@ -206,10 +206,7 @@ namespace NETLIB.TCP.Server
         /// <param name="conexao">New connection encapsulated in a <see cref="TCPPublisher"/>.</param>
         private void OnReceivedConnectionCall(Publisher conexao)
         {
-            if (ReceivedConnection != null)
-            {
-                ReceivedConnection(conexao);
-            }
+            ReceivedConnection?.Invoke(conexao);
         }
 
         #endregion

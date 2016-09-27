@@ -111,6 +111,7 @@ namespace NETLIB
             if (isAlive != false)
             {
                 CloseConnection();
+                GC.SuppressFinalize(this);
             }
         }
 
@@ -202,7 +203,7 @@ namespace NETLIB
         {
             if (isAlive)
             {
-                if (isEnabled && publisherThread != null && publisherThread.IsAlive)
+                if (isEnabled && publisherThread != null)
                 {
                     throw new PublisherRunnigException();
                 }
@@ -235,10 +236,7 @@ namespace NETLIB
         /// <see cref="CloseConnection"/>
         protected void OnConnectionClosedCall()
         {
-            if (ConnectionClosed != null)
-            {
-                ConnectionClosed();
-            }
+            ConnectionClosed?.Invoke();
         }
 
         /// <summary>
