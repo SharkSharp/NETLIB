@@ -104,7 +104,7 @@ namespace NETLIB
         /// <summary>
         /// Name used to identify this protocol.
         /// </summary>
-        /// <seealso cref="IOPackHandler{TPack}.AddProtocol(Protocol{TPack})"/>
+        /// <seealso cref="IOPackHandler{TPack}.AddProtocol(Protocol{TPack}, bool)"/>
         /// <see cref="IOPackHandler{TPack}.ExchangeProtocol(string)"/>
         public string Name
         {

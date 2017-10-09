@@ -15,7 +15,7 @@ namespace NETLIB
         /// <summary>
         /// Dictionary protocols that will store all protocols used by <see cref="IOPackHandler{TPack}"/>.
         /// </summary>
-        /// <seealso cref="AddProtocol(Protocol{TPack})"/>
+        /// <seealso cref="AddProtocol(Protocol{TPack}, bool)"/>
         /// <seealso cref="ExchangeProtocol(string)"/>
         Dictionary<string, Protocol<TPack>> protocols;
 
@@ -62,7 +62,7 @@ namespace NETLIB
         /// </summary>
         public string CurrentProtocolName
         {
-            get { return currentProtocol.Name; }
+            get { return currentProtocol?.Name; }
         }
 
         #endregion
@@ -79,7 +79,9 @@ namespace NETLIB
         {
             protocols.Add(newProtocol.Name, newProtocol);
             if (exchage)
+            {
                 currentProtocol = newProtocol;
+            }
         }
 
         /// <summary>
@@ -92,6 +94,19 @@ namespace NETLIB
         public void ExchangeProtocol(string protocolName)
         {
             currentProtocol = protocols[protocolName];
+        }
+
+        /// <summary>
+        /// Removes a protocol from the protocol dictionary.
+        /// </summary>
+        /// <param name="protocolName">Name of the protocol to be removed.</param>
+        public void RemoveProtocol(string protocolName)
+        {
+            if (currentProtocol.Name == protocolName)
+            {
+                currentProtocol = null;
+            }
+            protocols.Remove(protocolName);
         }
 
         /// <summary>

@@ -39,10 +39,12 @@ namespace NETLIB.Security
         public AESCryptIOPackHandler(Publisher publisher, Protocol<CryptPack> initialProtocol, byte[] iv, byte[] key)
             : base(publisher, initialProtocol)
         {
-            aesProvider = new AesCryptoServiceProvider();
-            aesProvider.IV = iv;
-            aesProvider.Key = key;
-            aesProvider.Padding = PaddingMode.None;
+            aesProvider = new AesCryptoServiceProvider
+            {
+                IV = iv,
+                Key = key,
+                Padding = PaddingMode.None
+            };
         }
 
         #endregion
@@ -62,10 +64,12 @@ namespace NETLIB.Security
         /// <param name="key"></param>
         public void InitializeAES(byte[] iv, byte[] key)
         {
-            aesProvider = new AesCryptoServiceProvider();
-            aesProvider.IV = iv;
-            aesProvider.Key = key;
-            aesProvider.Padding = PaddingMode.None;
+            aesProvider = new AesCryptoServiceProvider
+            {
+                IV = iv,
+                Key = key,
+                Padding = PaddingMode.None
+            };
         }
 
         /// <summary>
