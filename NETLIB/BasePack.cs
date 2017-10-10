@@ -323,7 +323,7 @@ namespace NETLIB
             {
                 result += (char)this.buffer[i];
             }
-            readPosition += size + sizeof(int);
+            readPosition += size;
             return result;
         }
 
